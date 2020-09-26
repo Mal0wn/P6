@@ -1,4 +1,7 @@
 const Sauce = require("../models/Sauce");
+
+// "fs" systeme de fichiers donne accès aux fonctions qui nous permettent de modifier le système de fichiers, 
+//y compris aux fonctions permettant de supprimer les fichiers.
 const fs = require('fs');
 
 

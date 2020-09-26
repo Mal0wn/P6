@@ -5,7 +5,7 @@ const path = require('path');
 const sauceRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
-mongoose.connect('mongodb+srv://mal0wn:Arkey0406^^@piqp6.xwpjl.gcp.mongodb.net/PiqP6?retryWrites=true&w=majority',   // connexion au cluster 
+mongoose.connect('mongodb+srv://Mal0wn:<Arkey0406>@cluster0.xacds.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority',   // connexion au cluster 
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
