@@ -2,16 +2,16 @@ const express = require('express'); // on importe l'application express
 const bodyParser = require('body-parser'); //on importe body-parser
 const mongoose = require('mongoose'); // on importe mongoose pour se connecter au cluster MongoDB
 const path = require('path');
-const sauceRoutes = require('./routes/sauces');
+const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
-mongoose.connect('mongodb+srv://Mal0wn:<Arkey0406>@cluster0.xacds.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority',   // connexion au cluster 
+mongoose.connect('mongodb+srv://Mal0wn:Arkey0406@cluster0.xacds.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority',   // connexion au cluster 
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
     .then(() => console.log('Connexion à MongoDB réussie !'))
-    .catch(() => console.log('Connexion à MongoDB échouée !'));
+    .catch(() => console.log('Damned Connexion à MongoDB échouée !'));
 
 
 const app = express(); // Création de  l'application express
@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());// Va transformer le corps de la requête en objet JS utilisable
 app.use('/images', express.static(path.join(__dirname, 'images')));
-app.use('/api/sauces', sauceRoutes); // Importation des routes depuis le fichier sauce.js du dossier routes
+app.use('/api/sauces', saucesRoutes); // Importation des routes depuis le fichier sauce.js du dossier routes
 app.use('/api/auth', userRoutes); // Importation de la route depuis le fichier user.js du dossier routes
 
 
