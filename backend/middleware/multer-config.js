@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
     filename: (req,file,callback) => {
     const name = file.originalname.split(' ').join('_'); // je delete les espace dans le titre pour coller les caractères
     const extension = MIME_TYPES[file.mimetype];
-    callback(null, name + Date.now()+ '.' + extension);
+    callback(null, name + Date.now()+ '.' + extension);   // renomme l'image en lui donnant son name+timestamp.jpeg
     }
 });
 

@@ -77,25 +77,25 @@ exports.likeSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id })                               // On cherche la sauce en question par rapport a l'ID
       .then(sauce => {
           switch (req.body.like) {
-              case -1:
-                  sauce.dislikes = sauce.dislikes + 1;
-                  sauce.usersDisliked.push(req.body.userId);
+              case -1:                                                // Dans le cas ou l'user dislike une sauce
+                  sauce.dislikes = sauce.dislikes + 1;                // on incremente sauce.dislike 
+                  sauce.usersDisliked.push(req.body.userId);          // on push dans sauce.usersDisliked l'userID du corps de la requete 
                   sauceObject = {
                       "dislikes": sauce.dislikes,
                       "usersDisliked": sauce.usersDisliked
                   }
                   break;
               case 0:
-                  if (sauce.usersDisliked.find(user => user === req.body.userId)) {
-                      sauce.usersDisliked = sauce.usersDisliked.filter(user => user !== req.body.userId);
-                      sauce.dislikes = sauce.dislikes - 1;
+                  if (sauce.usersDisliked.find(user => user === req.body.userId)) {                           
+                      sauce.usersDisliked = sauce.usersDisliked.filter(user => user !== req.body.userId);     //si l'userID correspond a l'id de l'user qui avait disliké la sauce
+                      sauce.dislikes = sauce.dislikes - 1;                                                    // on décrément le dislike
                       sauceObject = {
                           "dislikes": sauce.dislikes,
                           "usersDisliked": sauce.usersDisliked
                       }
                   } else {
-                      sauce.usersLiked = sauce.usersLiked.filter(user => user !== req.body.userId);
-                      sauce.likes = sauce.likes - 1;
+                      sauce.usersLiked = sauce.usersLiked.filter(user => user !== req.body.userId);           //si l'userID correspond a l'id de l'user qui avait liké la sauce
+                      sauce.likes = sauce.likes - 1;                                                           // on decremente le like
                       sauceObject = {
                           "likes": sauce.likes,
                           "usersLiked": sauce.usersLiked
@@ -103,7 +103,7 @@ exports.likeSauce = (req, res, next) => {
                   }
                   break;
               case +1:
-                  sauce.likes = sauce.likes + 1;
+                  sauce.likes = sauce.likes + 1;                                                              // dans le cas ou l'user like la sauce on incremente sauce.like
                   sauce.usersLiked.push(req.body.userId);
                   sauceObject = {
                       "likes": sauce.likes,
@@ -113,7 +113,7 @@ exports.likeSauce = (req, res, next) => {
               default:
                   return res.status(500).json({ error });
           }
-          Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+          Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })                   // fonction qui update la sauce au like ou dislike ou canceler/like dislike
               .then(() => res.status(200).json({ message: "Congrat's! La sauce est likée" }))
               .catch(error => res.status(400).json({ error }));
       })

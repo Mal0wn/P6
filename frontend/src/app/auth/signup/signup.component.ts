@@ -31,7 +31,6 @@ export class SignupComponent implements OnInit {
     const password = this.signupForm.get('password').value;
     this.auth.createUser(email, password).then(
       (response: { message: string }) => {
-        console.log(response.message);
         this.auth.loginUser(email, password).then(
           () => {
             this.loading = false;
