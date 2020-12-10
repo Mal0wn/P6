@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
     } else {                                                  
       next();                                                 // si tout est ok on passe a la fonction next()
     }
-  } catch {                                                                 // les erreurs générés d'affichent dans le bloc catch
+  } catch {                                                                 // les erreurs générés d'affichent dans le bloc catch   
     res.status(401).json({
       error: new Error("Damned ! La requete n'est pas authentifiée!")
     });

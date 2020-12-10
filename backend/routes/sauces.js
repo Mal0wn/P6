@@ -6,7 +6,7 @@ const sauceCtrl = require('../controllers/sauce');
 
 const multer = require('../middleware/multer-config');
 
-//Requête POST pour poster une sauce
+//Requête POST pour poster une sauce   
 router.post('/', auth, multer, sauceCtrl.createSauce );
 //Requête PUT pour modifier une sauce
 router.put('/:id', auth, multer, sauceCtrl.modifySauce);

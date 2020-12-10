@@ -18,4 +18,4 @@ const sauceSchema = mongoose.Schema({
     
 });
 
-module.exports = mongoose.model('Sauce', sauceSchema); // On exporte le schema en tant que modele Mongoose le rendant disponible pour notre app Express
+module.exports = mongoose.model('Sauce', sauceSchema); // On exporte le schema en tant que modele Mongoose le rendant disponible pour notre app Express   

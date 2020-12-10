@@ -1,11 +1,11 @@
 const Sauce = require("../models/Sauce");
 
 // "fs" systeme de fichiers donne accès aux fonctions qui nous permettent de modifier le système de fichiers, 
-//y compris aux fonctions permettant de supprimer les fichiers.
+//y compris aux fonctions permettant de supprimer les fichiers.    
 const fs = require('fs');
 
 
-//création de la sauce 
+  //création de la sauce 
 exports.createSauce = (req, res, next) => {                               
   //Création d'un objet réponse (constitué de "sauce" et de "image") qu'on met au format json
   const sauceObject = JSON.parse(req.body.sauce);
@@ -18,22 +18,22 @@ exports.createSauce = (req, res, next) => {
       imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
       mainPepper: sauceObject.mainPepper,
       heat: sauceObject.heat,
-     // likes: 0,
-     // dislikes: 0, 
+      //likes: 0,
+      //dislikes: 0, 
       //usersLiked: [],
       //usersDisliked: []
   });
-  sauce.save()                                                               // La methode save renvoie une Promise donc : 
+  sauce.save()                                                                // La methode save renvoie une Promise donc : 
       .then(() => res.status(201).json({message: "Sauce enregistrée !"}))     // Dans le bloc Then nous renverrons une reponse de reussite code 201 
       .catch(error => res.status(400).json({error}));                         // ou une erreur code 400
 };
 
 
 // modifier la sauce
-exports.modifySauce = (req, res, next) => {                                     // on export les fonctionSauce sauce des routes.
+exports.modifySauce = (req, res, next) => {                                    // on export les fonctionSauce sauce des routes.
     const sauceObject = req.file ?
       {
-        ...JSON.parse(req.body.sauce),        // Operateur Spread "..." utilisé pour faire une copie de tout les elemts de req.body
+        ...JSON.parse(req.body.sauce),                    // Operateur Spread "..." utilisé pour faire une copie de tout les elemts de req.body
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
       } : { ...req.body };
     Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id }) // On utilise le params.id de la requete pour reconfigurer notre sauce avec le meme ID qu'avant
@@ -47,7 +47,7 @@ exports.modifySauce = (req, res, next) => {                                     
     Sauce.findOne({ _id: req.params.id })
       .then(sauce => {
         const filename = sauce.imageUrl.split('/images/')[1];
-        fs.unlink(`images/${filename}`, () => {                 //fs va etre utiliser pour supprimer des fichiers 
+        fs.unlink(`images/${filename}`, () => {                                    //fs va etre utiliser pour supprimer des fichiers 
           Sauce.deleteOne({ _id: req.params.id })
             .then(() => res.status(200).json({ message: 'Sauce supprimée !'}))
             .catch(error => res.status(400).json({ error }));

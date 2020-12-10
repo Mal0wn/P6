@@ -3,7 +3,7 @@ const bodyParser = require('body-parser'); //Rend les données du corps de la re
 const mongoose = require('mongoose'); // on importe mongoose pour se connecter au cluster MongoDB et faciliter les interactions avec celui ci 
 const path = require('path');
 const saucesRoutes = require('./routes/sauces');  
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user');    
 
 mongoose.connect('mongodb+srv://Mal0wn:Arkey0406@cluster0.xacds.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority',   // connexion au cluster 
     {

@@ -8,12 +8,12 @@ const MIME_TYPES = {     // prendre tout type de terminaison
 
 const storage = multer.diskStorage({
     destination: (req,file,callback) => {
-        callback(null, 'images');
+        callback(null, 'images');                       //on donne une destination a multer pour qu'il enregistre dans le dossier 'images'
     },
-    filename: (req,file,callback) => {
-    const name = file.originalname.split(' ').join('_'); // je delete les espace dans le titre pour coller les caractères
-    const extension = MIME_TYPES[file.mimetype];
-    callback(null, name + Date.now()+ '.' + extension);   // renomme l'image en lui donnant son name+timestamp.jpeg
+    filename: (req,file,callback) => {                     //la fonctione filename indique a multer d'utiliser le nom d'origine
+    const name = file.originalname.split(' ').join('_'); // il delete les espace dans le titre pour y mettre des underscores
+    const extension = MIME_TYPES[file.mimetype];         // declaration de la constante extension pour résoudre l'extension de fichier appropriée
+    callback(null, name + Date.now()+ '.' + extension);   // renomme l'image en lui donnant son name+timestamp+.jpeg
     }
 });
 

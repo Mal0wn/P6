@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');     //generateur de hashage des mots de passe
 const jwt = require('jsonwebtoken');    // outil plugin generer des Token for User
 
-const User = require('../models/User');
+const User = require('../models/User');    
 
 //FONCTION CREATE A USER
 exports.signup = (req, res, next) => { 
